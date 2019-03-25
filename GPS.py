@@ -83,7 +83,7 @@ class GPS:
                 self.altitude = NMEA2_array[9]
                 self.sats = NMEA2_array[7]
 myGPS = GPS()
-GPSdata = open("/home/debian/GPS_data/GPS.txt", "w")
+GPSdata = open("/home/debian/bbgwGPS/GPS_data/GPS.txt", "w")
 GPSdata.close()
 while(1):
     myGPS.read()
@@ -97,7 +97,7 @@ while(1):
             if myGPS.latHem == "S":
                 latDec = (-1) * latDec
             alt = myGPS.altitude
-            GPSdata = open("/home/debian/GPS_data/GPS.txt", "a")
+            GPSdata = open("/home/debian/bbgwGPS/GPS_data/GPS.txt", "a")
             myString = str(lonDec) + "," + str(latDec) + "," + alt + "  "
             GPSdata.write(myString)
             GPSdata.close()
