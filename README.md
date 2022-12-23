@@ -29,4 +29,53 @@ follows you constantly.
 
 Seth
 
-P.S. That is all for now.
+P.S. That is all for now. Oh!
+
+```
+[Unit]
+Description=GPS .bash Script to Handle Movement
+
+[Service]
+ExecStartPre=/home/debian/config.sh
+ExecStart=/home/debian/GPS.sh
+
+[Install]
+WantedBy=multi-user.target
+```
+
+and then... GPS.sh
+
+```
+#!/bin/bash
+
+sudo gpsd /dev/ttyS2 -F /var/run/gpsd.sock
+
+sleep 60
+
+sudo gpspipe -r -d -l -o /home/debian/data/data.400.nmea
+```
+
+and then... config.sh
+
+```
+#!/bin/bash
+
+config-pin p9.21 uart
+config-pin p9.22 uart
+
+sudo systemctl restart gpsd.service
+```
+
+Then...change /etc/default/gpsd
+
+w/ the grove GPS for the BBGW, use ` /dev/ttyS2 `.
+
+```
+START_DAEMON="true"
+
+DEVICES="/dev/ttyS2"
+```
+
+There will be more options, esp. when looking at gpsd, to pick from currently.
+
+Enjoy!
