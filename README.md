@@ -9,7 +9,7 @@ If you are not going to create the data logger like at the bottom section of thi
 use this bit of source after handling the restarting of the ` gpsd.service ` file!
 
 ```
-#! /usr/bin/env python3
+#! /usr/bin/python3
 """
 example  Python gpsd client
 run this way: python3 example1.py.txt
@@ -56,8 +56,8 @@ Yes sir!
 
 ...
 
-Use python3 and restart the gpsd.service file like so: ` sudo systemctl restart gpsd.service `
-This way, the client is rebooted and can now be used.
+Use python3 or ` chmod 0755 YourPython.py ` file and restart the gpsd.service file like so: ` sudo systemctl restart gpsd.service `
+This way, the client is rebooted and can now be used w/ a simple ` ./YourPython.py `.
 
 ...
 
@@ -65,7 +65,7 @@ The kml wrapper in the GPS_data directory can be used as is in GoogleEarth for d
 your location and your path taken.
 
 Also, that other file, the .txt file in the GPS_data directory, will fill with your location
-or past locations when you run the GPS.py file on your BeagleBone Green Wireless.
+or past locations when you run the GPS.py file on your BeagleBone Green Wireless (WIP w/ gpsd)...
 
 ...
 
@@ -77,11 +77,14 @@ follows you constantly.
     BBBW but w/ the Green heading for some reason. Although different, it works and it is a nice 
     board.
 
+    The Grove GPS and BBGW are located in the files of photos. Enjoy...
 ...
 
 Seth
 
 P.S. That is all for now. Oh!
+
+a file for ` /etc/systemd/system/GPS.service ` is found below for starting your service...
 
 ```
 [Unit]
@@ -139,3 +142,5 @@ https://www.instructables.com/Raspberry-Pi-3-GPS-Data-Logger/
 ```
 
 Logging!
+
+If you need to go into specifics, go ahead or stick around for updates to this journey!
