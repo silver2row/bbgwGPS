@@ -1,11 +1,11 @@
-# bbgwGPS
+# bbgwGPS w/ gpsd!
 
-A toptechboy.com documentation on the BBGW (BeagleBone Green Wireless) made by me...
+I am using the BeagleBone Green Wireless with the Grove Connector at UART2
 
 ...
 
-This software can be used only w/ Python2 and not Python3 for whatever reason. 
-If you try it out w/ Python3 and make it work, more power to you and Godspeed.
+Use python3 and restart the gpsd.service file like so: ` sudo systemctl restart gpsd.service `
+This way, the client is rebooted and can now be used.
 
 ...
 
@@ -26,9 +26,6 @@ follows you constantly.
     board.
 
 ...
-
-If you are having troubles running this software from toptechboy.com and that Mr. Paul fellow 
-that initially typed up this source code, please do not hesitate to contact me.
 
 Seth
 
