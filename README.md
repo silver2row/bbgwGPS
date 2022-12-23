@@ -2,6 +2,58 @@
 
 I am using the BeagleBone Green Wireless with the Grove Connector at UART2
 
+More info. about the board can be found here:
+` https://wiki.seeedstudio.com/BeagleBone_Green_Wireless/ `
+
+If you are not going to create the data logger like at the bottom section of this tutorial, please
+use this bit of source after handling the restarting of the ` gpsd.service ` file!
+
+```
+#! /usr/bin/env python3
+"""
+example  Python gpsd client
+run this way: python3 example1.py.txt
+"""
+
+import gps               # the gpsd interface module
+
+session = gps.gps(mode=gps.WATCH_ENABLE)
+
+try:
+    while 0 == session.read():
+        if not (gps.MODE_SET & session.valid):
+            # not useful, probably not a TPV message
+            continue
+
+        print('Mode: %s(%d) Time: ' %
+              (("Invalid", "NO_FIX", "2D", "3D")[session.fix.mode],
+               session.fix.mode), end="")
+        # print time, if we have it
+        if gps.TIME_SET & session.valid:
+            print(session.fix.time, end="")
+        else:
+            print('n/a', end="")
+
+        if ((gps.isfinite(session.fix.latitude) and
+             gps.isfinite(session.fix.longitude))):
+            print(" Lat %.6f Lon %.6f" %
+                  (session.fix.latitude, session.fix.longitude))
+        else:
+            print(" Lat n/a Lon n/a")
+
+except KeyboardInterrupt:
+    # got a ^C.  Say bye, bye
+    print('')
+
+# Got ^C, or fell out of the loop.  Cleanup, and leave.
+session.close()
+exit(0)
+```
+
+That source can be found at https://gpsd.gitlab.io/gpsd/gpsd-client-example-code.html 
+
+Yes sir!
+
 ...
 
 Use python3 and restart the gpsd.service file like so: ` sudo systemctl restart gpsd.service `
@@ -79,3 +131,11 @@ DEVICES="/dev/ttyS2"
 There will be more options, esp. when looking at gpsd, to pick from currently.
 
 Enjoy!
+
+Oh and I learned those commands and about GPSBabel from this online community:
+
+```
+https://www.instructables.com/Raspberry-Pi-3-GPS-Data-Logger/
+```
+
+Logging!
